@@ -1,15 +1,15 @@
-import React from "react";
-import { render } from "@testing-library/react";
-import { Provider } from "react-redux";
-import { store } from "./app/store";
-import App from "./App";
+// import React from "react";
+// import { render } from "../utils/testUtils";
+// import { axe } from "jest-axe";
+// import App from "./App";
 
-test("renders learn react link", () => {
-  const { getByText } = render(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
+// test("should render", () => {
+//   render(<App />);
+// });
 
-  expect(getByText(/learn/i)).toBeInTheDocument();
-});
+// test("App should not have a11y violations", async () => {
+//   const { container } = render(<App />);
+
+//   expect(await axe(container)).toHaveNoViolations();
+// });
+export default {};

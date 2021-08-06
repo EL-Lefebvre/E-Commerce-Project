@@ -1,14 +1,13 @@
-import React from "react";
-import logo from "./logo.svg";
-import { Counter } from "./features/counter/Counter";
 import "./App.css";
-
+import MainNav from "./components/MainNav";
+import { Routes } from "./app/Routes/Routes";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <Counter />
-      </header>
+      <MainNav />
+      <main>
+        <Routes />
+      </main>
     </div>
   );
 }

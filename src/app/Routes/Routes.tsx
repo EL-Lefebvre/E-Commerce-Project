@@ -1,27 +1,30 @@
-import React,  from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import React from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
+const Home = React.lazy(() => import("../../features/home/Home"));
+const User = React.lazy(() => import("../../features/user/User"));
+const PageNotFound = React.lazy(
+  () => import("../../features/notFound/NotFound")
+);
 
 export const routes = {
-    counter: '/counter',
-    movies: '/movies',
-    forms: '/forms',
-    formHook: '/formHook',
-    NOT_FOUND: '/404',
-  };
+  home: "/home",
+  user: "/user",
+  NOT_FOUND: "/404",
+};
 
 export const Routes = () => {
-    return (
-        <Switch>
-      <Route exact path="/">
-        <Redirect to={routes.counter} />
-      </Route>
-      <Route exact path={routes.counter} component={Counter} />
-      <Route path={routes.movies} component={Movies} />
-      <Route path={routes.forms} component={FormikContacts} />
-      <Route path={routes.formHook} component={HookForm} />
-      <Route component={PageNotFound} />
-    </Switch>
-    )
-}
+  return (
+    <div>
+      hello
+      <Switch>
+        <Route exact path="/home">
+          <Redirect to={routes.home} />
+        </Route>
 
-
+        <Route exact path={routes.home} component={Home} />
+        <Route exact path={routes.user} component={User} />
+        <Route component={PageNotFound} />
+      </Switch>
+    </div>
+  );
+};

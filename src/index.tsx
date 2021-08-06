@@ -1,19 +1,32 @@
-import React from "react";
+/* istanbul ignore file */
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import { store } from "./app/store";
-import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
+import AppProviders from "./app/Providers/AppProviders";
+import App from "./App";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+declare global {
+  interface Window {
+    appConfig: any;
+  }
+}
+
+async function getConfig() {
+  const response = await fetch("/config.json");
+  return response.json();
+}
+
+getConfig()
+  .then((data) => {
+    window.appConfig = data;
+  })
+  .then(() => {
+    ReactDOM.render(
+      <AppProviders>
+        <App />
+      </AppProviders>,
+      document.getElementById("root")
+    );
+  });
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
