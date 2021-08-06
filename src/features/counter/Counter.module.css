@@ -4,8 +4,12 @@
   justify-content: center;
 }
 
-.row > * {
-  margin: 0.5rem;
+.row > button {
+  margin-left: 4px;
+  margin-right: 8px;
+}
+.row:not(:last-child) {
+  margin-bottom: 16px;
 }
 
 .value {
@@ -16,7 +20,41 @@
   font-family: 'Courier New', Courier, monospace;
 }
 
+.button {
+  appearance: none;
+  background: none;
+  font-size: 32px;
+  padding-left: 12px;
+  padding-right: 12px;
+  outline: none;
+  border: 2px solid transparent;
+  color: rgb(112, 76, 182);
+  padding-bottom: 4px;
+  cursor: pointer;
+  background-color: rgba(112, 76, 182, 0.1);
+  border-radius: 2px;
+  transition: all 0.15s;
+}
+
+.textbox {
+  font-size: 32px;
+  padding: 2px;
+  width: 64px;
+  text-align: center;
+  margin-right: 4px;
+}
+
+.button:hover,
+.button:focus {
+  border: 2px solid rgba(112, 76, 182, 0.4);
+}
+
+.button:active {
+  background-color: rgba(112, 76, 182, 0.2);
+}
+
 .asyncButton {
+  composes: button;
   position: relative;
 }
 
@@ -34,13 +72,7 @@
 }
 
 .asyncButton:active:after {
-  width: 0;
+  width: 0%;
   opacity: 1;
   transition: 0s;
-}
-
-.input {
-  display: inline-block;
-  text-align: center;
-  width: 4rem;
 }

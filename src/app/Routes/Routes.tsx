@@ -1,10 +1,8 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-const Home = React.lazy(() => import("../../features/home/Home"));
-const User = React.lazy(() => import("../../features/user/User"));
-const PageNotFound = React.lazy(
-  () => import("../../features/notFound/NotFound")
-);
+import Home from "../../features/home/Home";
+import User from "../../features/user/User";
+import PageNotFound from "../../features/notFound/NotFound";
 
 export const routes = {
   home: "/home",
@@ -15,15 +13,13 @@ export const routes = {
 export const Routes = () => {
   return (
     <div>
-      hello
       <Switch>
         <Route exact path="/home">
           <Redirect to={routes.home} />
         </Route>
-
         <Route exact path={routes.home} component={Home} />
         <Route exact path={routes.user} component={User} />
-        <Route component={PageNotFound} />
+        <Route exact path={routes.NOT_FOUND} component={PageNotFound} />
       </Switch>
     </div>
   );

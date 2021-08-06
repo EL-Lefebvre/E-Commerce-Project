@@ -1,14 +1,19 @@
 import "./App.css";
 import MainNav from "./components/MainNav";
 import { Routes } from "./app/Routes/Routes";
+import { Router } from "react-router-dom";
+import { createBrowserHistory } from "history";
 function App() {
+  const historyInstance = createBrowserHistory();
   return (
-    <div className="App">
+    <Router history={historyInstance}>
       <MainNav />
-      <main>
-        <Routes />
-      </main>
-    </div>
+      <div className="App">
+        <main>
+          <Routes />
+        </main>
+      </div>
+    </Router>
   );
 }
 

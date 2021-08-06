@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-
-import { useAppSelector, useAppDispatch } from "../../app/store/hooks";
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   decrement,
   increment,
@@ -8,22 +7,21 @@ import {
   incrementAsync,
   incrementIfOdd,
   selectCount,
-} from "./counterSlice";
-import styles from "./Counter.module.css";
+} from './counterSlice';
+import styles from './Counter.module.css';
 
-function Counter() {
-  const count = useAppSelector(selectCount);
-  const dispatch = useAppDispatch();
-  const [incrementAmount, setIncrementAmount] = useState("2");
+export function Counter() {
+  const count = useSelector(selectCount);
+  const dispatch = useDispatch();
+  const [incrementAmount, setIncrementAmount] = useState('2');
 
   const incrementValue = Number(incrementAmount) || 0;
 
   return (
     <div>
-      <h1>counter.title</h1>
       <div className={styles.row}>
         <button
-          className="btn btn-outline-primary btn-lg"
+          className={styles.button}
           aria-label="Decrement value"
           onClick={() => dispatch(decrement())}
         >
@@ -31,7 +29,7 @@ function Counter() {
         </button>
         <span className={styles.value}>{count}</span>
         <button
-          className="btn btn-outline-primary btn-lg"
+          className={styles.button}
           aria-label="Increment value"
           onClick={() => dispatch(increment())}
         >
@@ -40,26 +38,25 @@ function Counter() {
       </div>
       <div className={styles.row}>
         <input
-          className={"form-control form-control-lg " + styles.input}
+          className={styles.textbox}
           aria-label="Set increment amount"
           value={incrementAmount}
           onChange={(e) => setIncrementAmount(e.target.value)}
         />
         <button
-          className="btn btn-outline-primary btn-lg"
+          className={styles.button}
           onClick={() => dispatch(incrementByAmount(incrementValue))}
         >
           Add Amount
         </button>
         <button
-          className={"btn btn-outline-primary btn-lg " + styles.asyncButton}
-          // className={styles.asyncButton}
+          className={styles.asyncButton}
           onClick={() => dispatch(incrementAsync(incrementValue))}
         >
           Add Async
         </button>
         <button
-          className="btn btn-outline-primary btn-lg"
+          className={styles.button}
           onClick={() => dispatch(incrementIfOdd(incrementValue))}
         >
           Add If Odd
@@ -68,5 +65,3 @@ function Counter() {
     </div>
   );
 }
-
-export default Counter;
