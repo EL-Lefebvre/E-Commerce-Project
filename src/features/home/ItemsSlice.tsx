@@ -14,7 +14,13 @@ const initialState: itemsSliceState = {
   status: actionsStatus.idle,
 };
 
-const fetchAllItems = createAsyncThunk("home/getItems", getItems);
+const fetchAllItems = createAsyncThunk("items/fetchAllItems", async () => {
+  const response = await fetch(
+    "https://fakestoreapi.com/products/category/jewelery"
+  ).then((r) => r.json());
+
+  return response.response;
+});
 
 export const itemsSlice = createSlice({
   name: "items",
@@ -26,9 +32,9 @@ export const itemsSlice = createSlice({
         state.status = actionsStatus.loading;
         state.value = [];
       })
-      .addCase(fetchAllItems.fulfilled, (state, action: any) => {
+      .addCase(fetchAllItems.fulfilled, (state, action) => {
         state.status = actionsStatus.idle;
-        state.value = action.payload || [];
+        state.value.push(action.payload);
       })
       .addCase(fetchAllItems.rejected, (state) => {
         state.status = actionsStatus.failed;

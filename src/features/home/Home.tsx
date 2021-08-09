@@ -15,9 +15,9 @@ const Home = () => {
 
   console.log(fetchAllItems);
   useEffect(() => {
-    dispatch(fetchAllItems);
+    // dispatch(fetchAllItems);
     console.log(items);
-  }, []);
+  }, [dispatch]);
 
   console.log(items);
 
