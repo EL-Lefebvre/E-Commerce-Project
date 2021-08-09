@@ -14,9 +14,9 @@ export const Routes = () => {
   return (
     <div>
       <Switch>
-        <Route exact path="/home">
+        {/* <Route exact path="/home">
           <Redirect to={routes.home} />
-        </Route>
+        </Route> */}
         <Route exact path={routes.home} component={Home} />
         <Route exact path={routes.user} component={User} />
         <Route exact path={routes.NOT_FOUND} component={PageNotFound} />
