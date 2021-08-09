@@ -15,11 +15,15 @@ const initialState: itemsSliceState = {
 };
 
 const fetchAllItems = createAsyncThunk("items/fetchAllItems", async () => {
-  const response = await fetch(
-    "https://fakestoreapi.com/products/category/jewelery"
-  ).then((r) => r.json());
+  try {
+    const response = await fetch(
+      "https://fakestoreapi.com/products/category/jewelery"
+    ).then((r) => r.json());
 
-  return response.response;
+    return response;
+  } catch (e) {
+    console.log("error");
+  }
 });
 
 export const itemsSlice = createSlice({
@@ -48,7 +52,7 @@ export const actions = { ...itemsSlice.actions, fetchAllItems };
 
 // selectors
 export const seletors = {
-  fetchAllItems: (state: RootState): itemsList[] => state.items.value,
+  selectItems: (state: RootState): itemsList[] => state.items.value,
   selectStatus: (state: RootState): actionsStatus => state.items.status,
 };
 
