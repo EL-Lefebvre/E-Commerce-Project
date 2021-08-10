@@ -4,7 +4,7 @@ export interface itemsList {
   price: number;
   description: string;
   category: string;
-  image: string;
+  image?: string;
 }
 
 export const getItems = async () => {

@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store/store";
 import { actionsStatus } from "../../enums/actionsStatus";
 import { itemsList, getItems } from "./ItemsApi";
+import thunk from "redux-thunk";
 // const baseUrl = "https://fakestoreapi.com/products/category/jewelery";
 
 export interface itemsSliceState {
@@ -19,7 +20,6 @@ const fetchAllItems = createAsyncThunk("items/fetchAllItems", async () => {
     const response = await fetch(
       "https://fakestoreapi.com/products/category/jewelery"
     ).then((r) => r.json());
-
     return response;
   } catch (e) {
     console.log("error");
@@ -38,7 +38,7 @@ export const itemsSlice = createSlice({
       })
       .addCase(fetchAllItems.fulfilled, (state, action) => {
         state.status = actionsStatus.idle;
-        state.value.push(action.payload);
+        state.value = action.payload;
       })
       .addCase(fetchAllItems.rejected, (state) => {
         state.status = actionsStatus.failed;
@@ -48,7 +48,10 @@ export const itemsSlice = createSlice({
 });
 
 // actions
-export const actions = { ...itemsSlice.actions, fetchAllItems };
+export const actions = {
+  ...itemsSlice.actions,
+  fetchAllItems,
+};
 
 // selectors
 export const seletors = {

@@ -11,7 +11,7 @@ const MainNav = () => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <NavBar className="collapse navbar-collapse" id="navbarNav">
+      <div id="navbarNav">
         <List className="navbar-nav">
           {navs.map(({ label, to }) => (
             <ListItem key={`nav-${label}`} className="nav-item">
@@ -25,21 +25,17 @@ const MainNav = () => {
             </ListItem>
           ))}
         </List>
-      </NavBar>
+      </div>
     </nav>
   );
 };
 
-const NavBar = styled.div`
-  display: flex;
-  width: 100vw;
-  border-bottom: 1px black solid;
-`;
 const List = styled.ul`
   display: flex;
 `;
 const ListItem = styled.li`
   width: 20vw;
+  height: 10vh;
   list-style: none;
 `;
 const NavLinkItem = styled(NavLink)`

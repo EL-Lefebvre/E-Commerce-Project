@@ -1,27 +1,29 @@
-import React, { useEffect } from "react";
+import { database } from "faker/locale/en_AU";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/store/hooks";
 import { actionsStatus } from "../../enums/actionsStatus";
+import { itemsList } from "./ItemsApi";
 import { actions, seletors } from "./ItemsSlice";
+interface arrayOfItems {
+  [index: number]: itemsList;
+}
 
 const Home = () => {
   const { fetchAllItems } = actions;
   const { selectItems, selectStatus } = seletors;
   const dispatch = useAppDispatch();
-  const items = useAppSelector(selectItems);
+  const data = useAppSelector(selectItems);
   const status = useAppSelector(selectStatus);
-  // const status = useAppSelector(selectStatus);
-  // const [searchFor, setSearchFor] = React.useState("");
+  const [items, setItems] = useState(data as itemsList[]);
+  const isLoaded = status === actionsStatus.idle;
   const isLoading = status === actionsStatus.loading;
   const isFailure = status === actionsStatus.failed;
   const hasItems = selectItems.length > 0;
 
-  console.log(items);
   useEffect(() => {
     dispatch(fetchAllItems());
-    console.log(items);
+    setItems(data);
   }, []);
-
-  console.log(fetchAllItems);
 
   return (
     <>
@@ -32,19 +34,26 @@ const Home = () => {
         </div>
       )}
 
-      <ul className="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4">
-        {hasItems &&
-          items.map((m) => (
-            <li key={m.id} className="col">
-              <div>
-                <img src={m.image} className="card-img-top" alt={m.title} />
-                <div className="card-body">
-                  <div className="card-title">{m.title}</div>
+      <div>
+        {hasItems && isLoaded && (
+          <div>
+            {items.map((m) => (
+              <div key={m.id} className="col">
+                <div>
+                  <img
+                    src={m.image}
+                    style={{ height: "200px", width: "200px" }}
+                    alt={m.title}
+                  />
+                  <div className="card-body">
+                    <div className="card-title">{m.title}</div>
+                  </div>
                 </div>
               </div>
-            </li>
-          ))}
-      </ul>
+            ))}
+          </div>
+        )}
+      </div>
 
       {isFailure && (
         <div className="alert alert-danger mt-5" role="alert">
